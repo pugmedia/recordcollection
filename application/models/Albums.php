@@ -6,9 +6,14 @@ class Albums extends CI_Model {
   		$this->load->database(); 
 	}
 
-    function get_albums() {
+    function get_albums($id) {
     	//$this->db->cache_on();
-    	$query = $this->db->query('SELECT * FROM albums ORDER BY id ASC');
+    	if($id) {
+    		$query = $this->db->query('SELECT * FROM albums WHERE id = ' . $id . 'ORDER BY id ASC');
+    	} else {
+    		$query = $this->db->query('SELECT * FROM albums ORDER BY id ASC');	
+    	}
+    	
 
 		return $query->result();
     }
@@ -38,20 +43,28 @@ class Albums extends CI_Model {
 	function post_album($album) {
     	//$this->db->cache_on();
     	//$query = $this->db->query('INSERT INTO albums ');
-    	print_r($album);
+    	
 
-		$this->db->insert('albums', $album); 
+		$this->db->insert('albums', $album);
+
+		// get last insert ID!
+		$insert_id = $this->db->insert_id();
+		
+		print_r($insert_id);
 
 		//return $query->result();
     }
     
-	function delete_album($id) {
+	//function delete_album($id) {
+    function delete_album($artist) {
     	//$this->db->cache_on();
     	//$query = $this->db->query('INSERT INTO albums ');
     	
-    	print_r($id);
+    	//print_r($id);
+    	print_r($artist);
 
-		$this->db->where('id', $id);
+		//$this->db->where('id', $id);
+		$this->db->where('artist', $artist);
 		$this->db->delete('albums'); 
 
 		//return $query->result();

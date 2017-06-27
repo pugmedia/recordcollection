@@ -40,8 +40,9 @@ class Records extends REST_Controller {
     	
     	//if there is an id then get id and retrieve it.
     	$id = $this->get('id');
+    	print_r($id);
     	
-    	$data = $this->albums->get_albums();
+    	$data = $this->albums->get_albums($id);
     	
     	$this->response($data, REST_Controller::HTTP_OK);
     	//print_r($data);
@@ -75,7 +76,8 @@ class Records extends REST_Controller {
 
     }
     
-	public function index_delete($id) {
+	//public function index_delete($id) {
+    public function index_delete($artist) {
     	//$this->load->model('albums');
     	// album to update on DB
     	//$_DEL = json_decode(file_get_contents('php://input'), true);
@@ -88,7 +90,8 @@ class Records extends REST_Controller {
     	//print_r($id);
     	//print_r($_DEL);
     	//print_r("test");
-    	$data = $this->albums->delete_album($id);
+    	//$data = $this->albums->delete_album($id);
+    	$data = $this->albums->delete_album($artist);
     	
     	/*$this->response([
         'returned from delete:' => $id,

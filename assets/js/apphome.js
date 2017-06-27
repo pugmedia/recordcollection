@@ -32,14 +32,18 @@ routerApp.factory('getService', function($http) {
 	    async: function() {
 	      return $http.get('../api/records/index');
 	    },
+	    getone: function() {
+	      return $http.get('../api/records/index/', artist);
+	    },
 	    put: function(album) {
 	      return $http.put('../api/records/index/', album);
 	    },
 	    post: function(album) {
 		  return $http.post('../api/records/index/', album);
 		},
-		delete: function(id) {
-		  return $http.delete('../api/records/index/'+ id);
+		delete: function(artist) {
+		  //return $http.delete('../api/records/index/'+ id);
+		  return $http.delete('../api/records/index/'+ artist);
 		}
 	  };
 });
